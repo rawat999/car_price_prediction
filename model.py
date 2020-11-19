@@ -8,72 +8,22 @@ Created on Wed Nov 18 18:36:34 2020
 
 import numpy as np
 import pickle
-#import pandas as pd
-#from flasgger import Swagger
 import streamlit as st 
-#import sklearn.ensemble._forest
-
-#from PIL import Image
-
-#app=Flask(__name__)
-#Swagger(app)
 
 pickle_in = open("car_price_rf_model.pkl","rb")
 classifier=pickle.load(pickle_in)
+
 feature = pickle.load(open("car_feature.pkl","rb"))
 
-#@app.route('/')
+
 def welcome():
     return "Welcome All"
 
-#@app.route('/predict',methods=["Get"])
+
 def predict_car_price(data):
-    
-    """Let's PREDICT THE PRICE OF THE CARS 
-    This is using docstrings for specifications.
-    ---
-    parameters:  
-      - name:Volume(cm3)
-        in: query
-        type: number
-        required: true
-      - name: Year
-        in: query
-        type: number
-        required: true
-      - name: condition
-        in: query
-        type: string
-        required: true
-      - name: fuel type
-        in: query
-        type: string
-        required: true
-      - name:color
-        in: query
-        type: string
-        required: true
-      - name: transmission
-        in: query
-        type:string
-        required: true
-      - name:drive_unit
-        in: query
-        type:string
-        required: true
-      - name:segment
-        in: query
-        type: string
-        required: true
-    responses:
-        200:
-            description: The output values
-        
-    """
-    
     prediction=classifier.predict([data])
-    print(prediction)
-    return np.exp(prediction)
+    #print(prediction)
+    return round(np.exp(prediction)[0],2)
 
 
 def handle_condition(param):
@@ -152,15 +102,15 @@ def preparing_data(volume,car_age,condition,fuel_type,color,transmission,drive_u
     
 
 def main():
-    st.title("Car Price Predictor")
+    st.title("Car Price Prediction ML APP")
     html_temp = """
-    <div style="background-color:tomato;padding:10px">
-    <h2 style="color:white;text-align:center;">Car Price Prediction ML App </h2>
+    <div style="background-color:purple;padding:10px">
+    <h5 style="color:white;text-align:left;">Please Enter following car Features... </h5>
     </div>
     """
     st.markdown(html_temp,unsafe_allow_html=True)
-    volume = st.text_input("Volume(cm3)","Type Here")
-    year = st.text_input("Year","Type Here")
+    year = st.text_input("Year","Best Range [1938-2019]")
+    volume = st.text_input("Volume(cm3)","Best Range [500-20000]")
     condition = st.selectbox('Condition',feature[2:5])
     fuel_type = st.selectbox("Fuel Type",feature[5:7])
     color = st.selectbox("Color",feature[7:20])
@@ -178,11 +128,12 @@ def main():
         segment = handle_segment(segment)
         prepared_data = preparing_data(volume,car_age,condition,fuel_type,color,transmission,drive_unit,segment)
         result=predict_car_price(prepared_data)
-    st.success('Predicted Price of the Car is {}'.format(result))
+        st.success('Predicted Price of the Car is {} USD'.format(result))
     if st.button("About"):
         st.text("Built by Prem Singh Rawat")
         st.text("Release Date: 19 December, 2020")
 
 if __name__=='__main__':
+    welcome()
     main()
     
