@@ -7,12 +7,18 @@ Created on Wed Nov 18 18:36:34 2020
 """
 
 import numpy as np
-import pickle
+#import pickle
+import cPickle as pickle
 import streamlit as st 
 
-file = open("car_price_rf_model.pkl","rb")
-regressor=pickle.load(file)
-file.close()
+#file = open("car_price_rf_model.pkl","rb")
+#regressor=pickle.load(file)
+#file.close()
+
+# Read it back in
+with open('car_price_rf_model.pkl', 'rb') as f:
+    regressor = pickle.load(f)
+
 feature = pickle.load(open("car_feature.pkl","rb"))
 
 
