@@ -16,7 +16,7 @@ import streamlit as st
 #file.close()
 
 # Read it back in
-with open('car_price_rf_model.pkl', 'rb') as f:
+with open('car_price_lr_model.pkl', 'rb') as f:
     regressor = pickle.load(f)
 
 feature = pickle.load(open("car_feature.pkl","rb"))
