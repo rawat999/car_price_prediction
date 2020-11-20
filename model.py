@@ -10,7 +10,7 @@ import numpy as np
 import pickle
 import streamlit as st 
 
-file = open("car_price_rf_model.pkl","rb")
+file = open("car_price_lr_model.pkl","rb")
 regressor=pickle.load(file)
 file.close()
 feature = pickle.load(open("car_feature.pkl","rb"))
