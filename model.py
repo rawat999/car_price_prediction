@@ -7,8 +7,8 @@ Created on Wed Nov 18 18:36:34 2020
 """
 
 import numpy as np
-#import pickle
-import cPickle as pickle
+import pickle
+#import cPickle as pickle
 import streamlit as st 
 
 #file = open("car_price_rf_model.pkl","rb")
