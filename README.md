@@ -18,3 +18,5 @@ Files Explaination:
 7. car_feature.pkl: contain feautres use in the modelling
 
 8. cars_price.csv: dataset
+
+9. Challenge.pdf: problem statements by Mechademy challenge
