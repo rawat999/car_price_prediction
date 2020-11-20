@@ -10,9 +10,9 @@ import numpy as np
 import pickle
 import streamlit as st 
 
-pickle_in = open("car_price_rf_model.pkl","rb")
-classifier=pickle.load(pickle_in)
-
+file = open("car_price_rf_model.pkl","rb")
+regressor=pickle.load(file)
+file.close()
 feature = pickle.load(open("car_feature.pkl","rb"))
 
 
@@ -21,7 +21,7 @@ def welcome():
 
 
 def predict_car_price(data):
-    prediction=classifier.predict([data])
+    prediction=regressor.predict([data])
     #print(prediction)
     return round(np.exp(prediction)[0],2)
 
