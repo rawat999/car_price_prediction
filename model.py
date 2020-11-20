@@ -10,8 +10,7 @@ import numpy as np
 import pickle
 import streamlit as st 
 
-url = "https://github.com/rawatpremsingh999/car_price_prediction/blob/main/car_price_rf_model.pkl?raw=true"
-file = open(url,"rb")
+file = open("car_price_rf_model.pkl","rb")
 regressor=pickle.load(file)
 file.close()
 feature = pickle.load(open("car_feature.pkl","rb"))
