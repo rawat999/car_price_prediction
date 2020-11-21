@@ -105,7 +105,26 @@ def preparing_data(volume,car_age,condition,fuel_type,color,transmission,drive_u
     data_list += drive_unit
     data_list += segment
     return data_list
+ 
     
+def handle_year(year):
+    if year.isnumeric() and int(year) < 2020 and int(year) >= 1938:
+        car_age = 2020 - int(year)
+    else:
+        car_age = 16
+        st.text("car_year variable assigned default value i.e. 2004")
+    return car_age
+
+
+
+def handle_volume(volume):
+    if volume.isnumeric() and int(volume) >= 500 and int(volume) <= 20000:
+        volume = int(volume)
+    else:
+        volume = 2000
+        st.text("volume(cm3) variable assigned default value i.e. 2000")
+    return volume
+        
 
 def main():
     st.title("Car Price Prediction ML APP")
@@ -115,8 +134,8 @@ def main():
     </div>
     """
     st.markdown(html_temp,unsafe_allow_html=True)
-    year = st.text_input("Year","Best Range [1938-2019]")
-    volume = st.text_input("Volume(cm3)","Best Range [500-20000]")
+    year = st.text_input("Year (Range: 1938-2019)","e.g. 2000")
+    volume = st.text_input("Volume(cm3) (Range: 500-20000)","e.g. 2500")
     condition = st.selectbox('Condition',feature[2:5])
     fuel_type = st.selectbox("Fuel Type",feature[5:7])
     color = st.selectbox("Color",feature[7:20])
@@ -125,19 +144,20 @@ def main():
     segment = st.selectbox("Segment",feature[26:])
     result=""
     if st.button("Predict"):
-        car_age = 2020 - int(year)
+        car_age = handle_year(year)
+        vol = handle_volume(volume)
         condition = handle_condition(condition)
         fuel_type = handle_fuel(fuel_type)
         color = handle_color(color)
         transmission = handle_transmission(transmission)
         drive_unit = handle_drive_unit(drive_unit)
         segment = handle_segment(segment)
-        prepared_data = preparing_data(volume,car_age,condition,fuel_type,color,transmission,drive_unit,segment)
+        prepared_data = preparing_data(vol,car_age,condition,fuel_type,color,transmission,drive_unit,segment)
         result=predict_car_price(prepared_data)
         st.success('Predicted Price of the Car is {} USD'.format(result))
     if st.button("About"):
         st.text("Built by Prem Singh Rawat")
-        st.text("Release Date: 19 December, 2020")
+        st.text("Release Date: 20 November, 2020")
 
 if __name__=='__main__':
     welcome()
