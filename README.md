@@ -1,6 +1,9 @@
 # car_price_prediction
 Mechademy Challenge
 
+NOTE: You can visit depolyed car price prediction model using following link -
+      Streamlit App: https://share.streamlit.io/rawatpremsingh999/car_price_prediction/model.py
+
 Files Explaination:
 1. Model_without_missing_values.ipynb: It is notebook file which model the problem by removing all samples containing NULL values.
 
