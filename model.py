@@ -134,8 +134,8 @@ def main():
     </div>
     """
     st.markdown(html_temp,unsafe_allow_html=True)
-    year = st.text_input("Year (Range: 1938-2019)","e.g. 2000")
-    volume = st.text_input("Volume(cm3) (Range: 500-20000)","e.g. 2500")
+    year = st.text_input("Year (Range: 1938-2019)","")
+    volume = st.text_input("Volume(cm3) (Range: 500-20000)","")
     condition = st.selectbox('Condition',feature[2:5])
     fuel_type = st.selectbox("Fuel Type",feature[5:7])
     color = st.selectbox("Color",feature[7:20])
